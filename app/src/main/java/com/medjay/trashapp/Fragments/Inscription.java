@@ -28,7 +28,7 @@ public class Inscription extends Fragment {
         _inscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String n="iuguygyug";
             }
         });
 
