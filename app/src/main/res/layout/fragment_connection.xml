@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:text="Connectez-vous pour continuer"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:layout_below="@+id/welcmtext"
         android:id="@+id/signinto"/>
 
@@ -98,6 +98,57 @@
         android:textColorHint="@color/white"
         android:textAlignment="textStart"
         android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:padding="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Or"
+        android:id="@+id/or"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_below="@id/btn_login"
+        android:layout_marginTop="15dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignBottom="@id/or"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@id/or"
+        android:background="@color/view" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignBottom="@id/or"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@id/or"
+        android:background="@color/view" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/button_back_vide"
+        android:hint="Se Connecter avec Facebook"
+        android:textColor="@color/white"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/or"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_facebook"
+        android:textColorHint="@color/view"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:drawableLeft="@drawable/facebook"
         android:padding="20dp"
         />
 
