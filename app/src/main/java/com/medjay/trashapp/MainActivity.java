@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             builder.setCancelable(false);
             dialog = builder.create();
             dialog.show();
+
+
         }
     }
 
