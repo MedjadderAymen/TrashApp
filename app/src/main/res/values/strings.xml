@@ -2,5 +2,10 @@
     <string name="app_name">TrashApp</string>
     <string name="facebook_app_id">2187408851560231</string>
     <string name="fb_login_protocol_scheme">fb2187408851560231</string>
+    <string name="open_Drawer">Open Drawer</string>
+    <string name="Close_Drawer">Close Drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
