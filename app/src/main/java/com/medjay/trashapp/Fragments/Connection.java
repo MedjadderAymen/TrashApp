@@ -1,16 +1,13 @@
 package com.medjay.trashapp.Fragments;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -27,11 +24,8 @@ import com.medjay.trashapp.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import androidx.annotation.NonNull;
@@ -46,6 +40,7 @@ public class Connection extends Fragment {
     TextInputLayout _password;
     Button _connect;
     LoginButton _connectFacebook;
+    TextView textView;
 
     CallbackManager callbackManager;
 
@@ -64,6 +59,7 @@ public class Connection extends Fragment {
         _password = view.findViewById(R.id.til_password);
         _connect = view.findViewById(R.id.btn_login);
         _connectFacebook = view.findViewById(R.id.btn_facebook);
+        textView=view.findViewById(R.id.signinto);
 
         callbackManager = CallbackManager.Factory.create();
         _connectFacebook.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
@@ -137,8 +133,9 @@ public class Connection extends Fragment {
 
         try {
             URL profileçpic=new URL("https://graph.facebook.con/"+obj.getString("id")+"/picture?width=250&height=50");
-
+            textView.setText(obj.getString("email"));
             Toast.makeText(getContext(),"email is "+obj.getString("email"),Toast.LENGTH_LONG);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (JSONException e) {

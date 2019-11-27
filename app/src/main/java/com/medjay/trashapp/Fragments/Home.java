@@ -32,8 +32,8 @@ public class Home extends Fragment {
         viewPager=view.findViewById(R.id.container);
 
         ViewPagerAdapter adapter=new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new List(),"Se connecter");
-        adapter.addFragment(new Maps(),"S'inscrire");
+        adapter.addFragment(new List(),"List");
+        adapter.addFragment(new Maps(),"Maps");
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
