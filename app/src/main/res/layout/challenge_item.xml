@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:elevation="10dp">
+
+    <ImageView
+        android:id="@+id/chal_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"/>
+
+    <TextView
+        android:id="@+id/chal_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="title"
+        android:layout_below="@+id/chal_image"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:drawableLeft="@drawable/ic_location_on_black_24dp"
+        android:id="@+id/chal_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="location"
+        android:layout_below="@+id/chal_title"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/chal_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20/12/2019"
+        android:layout_below="@+id/chal_image"
+        android:textSize="20sp"
+        android:layout_alignEnd="@id/chal_image"
+        android:textStyle="bold"/>
+
+
+
+</RelativeLayout>

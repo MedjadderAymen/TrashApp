@@ -49,7 +49,7 @@
             android:id="@+id/tabs"
             app:tabGravity="fill"
             app:tabMode="fixed"
-            app:tabTextColor="@color/colorPrimaryDark"
+            app:tabTextColor="@color/colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

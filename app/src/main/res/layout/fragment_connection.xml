@@ -13,7 +13,7 @@
         android:text="Bienvenue à TrashApp"
         android:textSize="30dp"
         android:layout_marginTop="60dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/welcmtext"
         />
 
@@ -37,7 +37,7 @@
         android:layout_marginLeft="30dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -120,7 +120,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/or"
+        android:layout_toRightOf="@id/or"
         android:background="@color/view" />
 
     <View
@@ -131,7 +131,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="10dp"
-        android:layout_toStartOf="@id/or"
+        android:layout_toLeftOf="@id/or"
         android:background="@color/view" />
 
 

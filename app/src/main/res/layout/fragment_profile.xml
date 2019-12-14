@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.List">
+    tools:context=".Fragments.Profile">
 
     <!-- TODO: Update blank fragment layout -->
-    <ListView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/LV"/>
+        android:text="profile" />
 
 </FrameLayout>

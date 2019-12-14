@@ -13,7 +13,7 @@
         android:text="Il suffit de remplir les champs"
         android:textSize="25dp"
         android:layout_marginTop="40dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/welcmtext"
         />
 
