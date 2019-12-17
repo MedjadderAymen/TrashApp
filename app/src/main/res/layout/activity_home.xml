@@ -19,7 +19,7 @@
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         app:active_item_color="@color/colorAccent"
-        app:centre_button_color="@color/white"
+        app:centre_button_color="@color/colorPrimary"
         app:inactive_item_color="@color/view"
         app:space_background_color="@color/white"
         android:elevation="5dp"

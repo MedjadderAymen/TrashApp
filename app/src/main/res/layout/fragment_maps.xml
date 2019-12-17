@@ -3,12 +3,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Maps">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="maps" />
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <org.mapsforge.map.android.view.MapView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mapView"/>
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:padding="10dp"
+        android:id="@+id/chal_on_map"
+        app:cardCornerRadius="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="invisible"
+        app:cardElevation="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="90dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:paddingTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/chal_owner_pic"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ok"
+                app:civ_border_width="2dp"
+                app:civ_border_color="@color/view"/>
+
+            <TextView
+                android:id="@+id/chal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nétoyage centre ville"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/chal_owner_pic"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/chal_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chal_title"
+                android:layout_toRightOf="@id/chal_owner_pic"
+                android:layout_marginLeft="3dp"
+                android:text="Medjadder Aimen"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/chal_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chal_owner"
+                android:layout_toRightOf="@id/chal_owner_pic"
+                android:layout_marginLeft="5dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/chal_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="il y a 16h"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/view"
+                android:textStyle="bold" />
+
+             <TextView
+                 android:id="@+id/chal_description"
+                 android:layout_margin="5dp"
+                 android:paddingLeft="5dp"
+                 android:paddingRight="5dp"
+                 android:layout_below="@id/chal_owner_pic"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:text="@string/lorem"/>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/chal_description"
+                android:background="@color/view"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/chal_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:text="Détaille"
+                android:layout_alignParentRight="true"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="15dp"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/chal_takeMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:text="Itinéraire"
+                android:layout_alignParentLeft="true"
+                android:drawableRight="@drawable/location_take_me"
+                android:textStyle="bold"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="15dp"/>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
 </FrameLayout>

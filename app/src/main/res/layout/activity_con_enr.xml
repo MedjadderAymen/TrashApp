@@ -55,12 +55,6 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <View
-            android:background="@color/view"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/container"

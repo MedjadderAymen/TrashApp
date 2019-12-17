@@ -8,6 +8,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -18,15 +19,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class MainActivity extends AppCompatActivity {
 
     protected int SPLASH_TIME_OUT = 2000;
     private static final int LOCATION_APP_PERM = 123;
+
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     int minTime = 5000;
     float minDistance = 10;
 
-    double x,y,z;
+    double Longitude,Latitude,Altitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +50,43 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
+        preferences=getSharedPreferences("prefs",MODE_PRIVATE);
+        editor=preferences.edit();
+
         requestPermissions();
 
         askActualPosition();
+
+        if (Longitude!=0 && Latitude!=0 && Altitude!=0 ){
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent=new Intent(MainActivity.this, Welcome.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putDouble("Longitude",Longitude);
+                    editor.putFloat("Longitude",(float)Longitude);
+                    bundle.putDouble("Latitude",Latitude);
+                    editor.putFloat("Latitude",(float)Latitude);
+                    bundle.putDouble("Altitude",Altitude);
+                    editor.putFloat("Altitude",(float)Altitude);
+                    editor.apply();
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
+                }
+            },SPLASH_TIME_OUT);
+        }else{
+
+            View view=findViewById(R.id.ContextView);
+            Snackbar.make(view,R.string.app_name,Snackbar.LENGTH_SHORT)
+                    .setAction("check", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                        }
+                    });
+        }
 
     }
 
@@ -91,9 +131,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (location!=null){
                 Log.i("GeoFragment","position trouvé");
-                x = location.getLongitude();
-                y = location.getLatitude();
-                z = location.getAltitude();
+                Longitude = location.getLongitude();
+                Latitude = location.getLatitude();
+                Altitude = location.getAltitude();
 
             }else {
                 Log.i("GeoFragment","position non trouvé");
@@ -111,19 +151,14 @@ public class MainActivity extends AppCompatActivity {
         locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                x = location.getLongitude();
-                y = location.getLatitude();
-                z = location.getAltitude();
+                Longitude = location.getLongitude();
+                Latitude = location.getLatitude();
+                Altitude = location.getAltitude();
 
-                Toast.makeText(MainActivity.this,"getLongitudeNOW"+x,Toast.LENGTH_LONG).show();
-                Log.i("getLongitudeNOW",""+x);
-                Log.i("getLatitudeNOW",""+y);
-                Log.i("getAltitudeNOW",""+z);
+                Log.i("getLongitudeNOW",""+Longitude);
+                Log.i("getLatitudeNOW",""+Latitude);
+                Log.i("getAltitudeNOW",""+Altitude);
 
-                if (x!=0 && y!=0 && z!=0 ){
-                    startActivity(new Intent(MainActivity.this, Welcome.class));
-                    finish();
-                }
             }
 
             @Override
