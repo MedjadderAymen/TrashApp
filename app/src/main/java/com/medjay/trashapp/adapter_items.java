@@ -8,21 +8,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.medjay.trashapp.entities.Challenges;
+
+import com.medjay.trashapp.entities.Challenge;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 
-public class adapter_items extends ArrayAdapter<Challenges>{
+public class adapter_items extends ArrayAdapter<Challenge>{
 
 
         Activity activity;
         int idimg;
-        List<Challenges> items;
+        List<Challenge> items;
 
 
-        public adapter_items (Activity activity, int idimg, List<Challenges> items) {
+        public adapter_items (Activity activity, int idimg, List<Challenge> items) {
             super(activity, idimg, items);
             this.activity = activity;
             this.idimg = idimg;

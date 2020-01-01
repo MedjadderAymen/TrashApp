@@ -80,14 +80,26 @@
                 android:textStyle="normal" />
 
             <TextView
-                android:id="@+id/chal_date"
+                android:id="@+id/chal_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:text="X"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/view"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/chal_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/chal_cancel"
                 android:text="il y a 16h"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/view"
                 android:textStyle="bold" />
+
+
 
              <TextView
                  android:id="@+id/chal_description"

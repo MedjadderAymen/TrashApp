@@ -10,6 +10,8 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 import android.os.Environment;
 import android.os.Vibrator;
@@ -26,7 +28,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.medjay.trashapp.Network.RetrofitBuilder;
+import com.medjay.trashapp.Network.WebServerIntf;
 import com.medjay.trashapp.R;
+import com.medjay.trashapp.entities.Challenge;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -67,7 +72,7 @@ public class Maps extends Fragment {
     private TileCache tileCache;
 
     private CardView cardView;
-    private TextView _chal_address,_chal_takeMe;
+    private TextView _chal_address,_chal_takeMe,_chal_title,_chal_owner,_chal_cancel;
 
     private SharedPreferences preferences;
     private float Latitude;
@@ -85,6 +90,9 @@ public class Maps extends Fragment {
         cardView=view.findViewById(R.id.chal_on_map);
         _chal_address=view.findViewById(R.id.chal_address);
         _chal_takeMe=view.findViewById(R.id.chal_takeMe);
+        _chal_title=view.findViewById(R.id.chal_title);
+        _chal_owner=view.findViewById(R.id.chal_owner);
+        _chal_cancel=view.findViewById(R.id.chal_cancel);
 
         geocoder=new Geocoder(getContext(), Locale.getDefault());
 
@@ -120,12 +128,13 @@ public class Maps extends Fragment {
                 AndroidGraphicFactory.INSTANCE) {
             @Override
             public boolean onLongPress(LatLong tapLatLong, Point layerXY, Point tapXY) {
-                drawMarker(R.drawable.ic_location_on_black_24dp, tapLatLong);
-                Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.vibrate(500);
+                //                drawMarker(R.drawable.ic_location_on_black_24dp, tapLatLong);
+//                Vibrator vibrator = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+//                vibrator.vibrate(500);
                 return true;
             }
-        };
+        }
+        ;
 
         tileRendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         mapView.getLayerManager().getLayers().add(tileRendererLayer);
@@ -135,8 +144,30 @@ public class Maps extends Fragment {
 
         LatLong latLong=new LatLong(Latitude, Longitude);
         mapView.setCenter(latLong);
-        drawMarker(R.drawable.ic_my_location_black_24dp,latLong);
+        drawMyPositionMarker(R.drawable.ic_my_location_black_24dp,latLong);
         mapView.setZoomLevel((byte) 19);
+
+        getChallenges();
+    }
+
+    private void getChallenges() {
+        WebServerIntf serverIntf= RetrofitBuilder.getRetrofitInstance().create(WebServerIntf.class);
+        Call<List<Challenge>> call = serverIntf.getChallenges();
+
+        call.enqueue(new Callback<List<Challenge>>() {
+            @Override
+            public void onResponse(Call<List<Challenge>> call, retrofit2.Response<List<Challenge>> response) {
+                for (int i=0;i<response.body().size();i++){
+                Challenge challenge=response.body().get(i);
+                    drawChallengesMarker(R.drawable.ic_location_on_black_24dp,challenge);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Challenge>> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -146,18 +177,19 @@ public class Maps extends Fragment {
         super.onDestroy();
     }
 
-    public void drawMarker(int resourceId, final LatLong geoPoint){
+    public void drawChallengesMarker(int resourceId, final Challenge challenge){
         Drawable drawable = getResources().getDrawable(resourceId);
 
         Bitmap bitmap = AndroidGraphicFactory.convertToBitmap(drawable);
 
         bitmap.scaleTo(50,50);
-        Marker marker = new Marker(geoPoint, bitmap, 0, -bitmap.getHeight() / 2){
+        final LatLong latLong=new LatLong(challenge.getLatitude(),challenge.getLongitude());
+        Marker marker = new Marker(latLong, bitmap, 0, -bitmap.getHeight() / 2){
             @Override
             public boolean onTap(LatLong tapLatLong, Point layerXY, Point tapXY) {
                 if (contains(layerXY,tapXY)){
                     try {
-                        addresses = geocoder.getFromLocation(geoPoint.latitude,geoPoint.longitude,1);
+                        addresses = geocoder.getFromLocation(latLong.latitude,latLong.longitude,1);
                         Toast.makeText(getContext()," Country "+addresses.get(0).getCountryName()+
                                 " Wilaya "+addresses.get(0).getAdminArea()+
                                 " Belediya "+addresses.get(0).getLocality()+
@@ -167,12 +199,23 @@ public class Maps extends Fragment {
                         if (cardView.getVisibility()==View.INVISIBLE | cardView.getVisibility()==View.GONE){
                             cardView.setVisibility(View.VISIBLE);
                         }
+                        _chal_title.setText(challenge.getCity());
+                        _chal_owner.setText(challenge.getOwner().getFirst_name());
                         _chal_address.setText(addresses.get(0).getAdminArea()+ " "+addresses.get(0).getLocality());
 
                         _chal_takeMe.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                    GetRoute(geoPoint.latitude,geoPoint.longitude);
+                                    GetRoute(latLong.latitude,latLong.longitude);
+                            }
+                        });
+
+                        _chal_cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cardView.getVisibility()==View.VISIBLE ){
+                                    cardView.setVisibility(View.INVISIBLE);
+                                }
                             }
                         });
 
@@ -182,6 +225,26 @@ public class Maps extends Fragment {
                     }
 
                     return true;
+                }
+
+                return false;
+            }
+        };
+        mapView.getLayerManager().getLayers().add(marker);
+    }
+
+    public void drawMyPositionMarker(int resourceId, final LatLong geoPoint){
+        Drawable drawable = getResources().getDrawable(resourceId);
+
+        Bitmap bitmap = AndroidGraphicFactory.convertToBitmap(drawable);
+
+        bitmap.scaleTo(50,50);
+        Marker marker = new Marker(geoPoint, bitmap, 0, -bitmap.getHeight() / 2){
+            @Override
+            public boolean onTap(LatLong tapLatLong, Point layerXY, Point tapXY) {
+                if (contains(layerXY,tapXY)){
+
+                    Toast.makeText(getContext(),"You are here",Toast.LENGTH_LONG).show();
                 }
 
                 return false;
