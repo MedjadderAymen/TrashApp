@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Create_Challenge">
+
+<RelativeLayout
+    android:id="@+id/rl"
+    android:padding="10dp"
+    android:background="@color/colorPrimaryDark"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Challenge"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:id="@+id/welcmtext"
+        />
+
+    <ImageView
+        android:layout_alignBottom="@id/welcmtext"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear_black_24dp"/>
+</RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/chal_address"
+        android:layout_below="@id/rl"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="15dp"
+        android:hint="Constantine"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <org.mapsforge.map.android.view.MapView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/mapView"
+        android:layout_below="@id/chal_address"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_startDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mapView"
+        android:layout_marginTop="20dp"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Start date"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:padding="10dp"
+            android:imeOptions="actionNext"
+            android:id="@+id/startDate"
+            android:inputType="date"
+            />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_endDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/til_startDate"
+        android:layout_marginTop="20dp"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="End date"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:padding="10dp"
+            android:imeOptions="actionNext"
+            android:id="@+id/endDate"
+            android:inputType="date"
+            />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/til_endDate"
+        android:layout_above="@id/ll"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/chal_add_photo"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/ic_insert_photo_black_24dp"/>
+
+    <com.ebanx.swipebtn.SwipeButton
+        android:id="@+id/swipe_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:inner_text="create challenge"
+        app:inner_text_color="@android:color/white"
+        app:inner_text_size="16sp"
+        app:inner_text_top_padding="10dp"
+        app:inner_text_bottom_padding="10dp"
+        app:inner_text_background="@drawable/button_back"
+        app:button_image_disabled="@drawable/ic_keyboard_arrow_right_primary_color_24dp"
+        app:button_image_enabled="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:button_left_padding="20dp"
+        app:button_right_padding="20dp"
+        app:button_top_padding="12dp"
+        app:button_bottom_padding="12dp"
+        app:button_background="@drawable/back_ground_other"
+        />
+
+    </LinearLayout>
+</RelativeLayout>

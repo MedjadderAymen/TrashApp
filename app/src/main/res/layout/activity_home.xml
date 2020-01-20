@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Home_background"
+    android:id="@+id/coordinatorLayout"
     tools:context=".Home">
 
     <FrameLayout
         android:id="@+id/frame_content"
+        android:layout_above="@id/space"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

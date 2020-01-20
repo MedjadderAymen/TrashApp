@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "642778939422",
+    "firebase_url": "https://trashapp-dc405.firebaseio.com",
+    "project_id": "trashapp-dc405",
+    "storage_bucket": "trashapp-dc405.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642778939422:android:64357a7da17b665339ae0f",
+        "android_client_info": {
+          "package_name": "com.medjay.trashapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642778939422-m658qeqmsb0otmum19jonrpt0vkvnll7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.medjay.trashapp",
+            "certificate_hash": "6409dc4251e7f9b0ec569fc9b9270655cd9c953b"
+          }
+        },
+        {
+          "client_id": "642778939422-qndnq63p5stohd175l00qjomfccvo7vi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR1G9iOVp6N0gdCDQHpepBK27DVnayKC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642778939422-qndnq63p5stohd175l00qjomfccvo7vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

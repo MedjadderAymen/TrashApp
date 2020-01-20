@@ -6,13 +6,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.Inscription">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/person2" />
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:text="Il suffit de remplir les champs"
+        android:text="New Account!"
         android:textSize="25dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/colorPrimary"
         android:id="@+id/welcmtext"
         />
@@ -21,24 +31,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-        android:text="Il ne reste qu'une seul étape"
+        android:text="Just fill in the fields"
         android:textSize="15dp"
         android:layout_below="@+id/welcmtext"
         android:id="@+id/signinto" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signinto"
+            android:layout_marginTop="20dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:imeOptions="actionNext"
+                android:id="@+id/name"
+                android:inputType="text"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/til_firstname"
+            android:layout_marginTop="20dp"
+
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:imeOptions="actionNext"
+                android:id="@+id/lastname"
+                android:inputType="text"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_name"
+        android:id="@+id/til_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signinto"
+        android:layout_below="@+id/til_lastname"
         android:layout_marginTop="20dp"
 
         >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:hint="Nom d'utilisateur"
+            android:layout_height="wrap_content"
+            android:hint="Username"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -51,41 +108,44 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email"
+        android:id="@+id/til_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_name"
-        android:layout_marginTop="18dp"
-        app:passwordToggleEnabled="true">
+        android:layout_below="@+id/til_username"
+        android:layout_marginTop="20dp"
+
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:imeOptions="actionNext"
-            android:layout_height="70dp"
-            android:hint="Email"
+            android:layout_height="wrap_content"
+            android:hint="Birth date"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:padding="10dp"
-            android:id="@+id/email"
-            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:id="@+id/birthday"
+            android:inputType="date"
             />
+
+
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_tlfn"
+        android:id="@+id/til_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_email"
+        android:layout_below="@+id/til_birthday"
         android:layout_marginTop="18dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:hint="Téléphone"
+            android:layout_height="wrap_content"
+            android:hint="Phone number"
             android:imeOptions="actionNext"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="15dp"
@@ -101,15 +161,15 @@
         android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_tlfn"
+        android:layout_below="@+id/til_phone"
         android:layout_marginTop="18dp"
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:imeOptions="actionDone"
-            android:layout_height="70dp"
-            android:hint="Mot de pass"
+            android:layout_height="wrap_content"
+            android:hint="Password"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
@@ -121,7 +181,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:background="@drawable/button_back"
         android:hint="Procéder"
         android:textColor="@color/white"
@@ -132,9 +192,7 @@
         android:id="@+id/btn_signup"
         android:textColorHint="@color/white"
         android:textAlignment="textStart"
-        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:padding="20dp"
-        />
-
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_white_color_24dp"
+        android:padding="20dp" />
 
 </RelativeLayout>

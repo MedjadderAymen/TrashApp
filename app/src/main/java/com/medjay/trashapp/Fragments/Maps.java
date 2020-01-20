@@ -1,6 +1,6 @@
 package com.medjay.trashapp.Fragments;
 
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -14,11 +14,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 
 import android.os.Environment;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,10 +28,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.medjay.trashapp.Challenge_details;
 import com.medjay.trashapp.Network.RetrofitBuilder;
 import com.medjay.trashapp.Network.WebServerIntf;
 import com.medjay.trashapp.R;
 import com.medjay.trashapp.entities.Challenge;
+import com.medjay.trashapp.entities.Photo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -68,11 +71,11 @@ public class Maps extends Fragment {
     private Geocoder geocoder;
 
     private MapView mapView;
-    private TextView _chal_toggle;
     private TileCache tileCache;
 
     private CardView cardView;
-    private TextView _chal_address,_chal_takeMe,_chal_title,_chal_owner,_chal_cancel;
+    private ImageView _chal_photo;
+    private TextView _chal_address,_chal_takeMe,_chal_owner,_chal_cancel,_chal_toggle;
 
     private SharedPreferences preferences;
     private float Latitude;
@@ -90,9 +93,10 @@ public class Maps extends Fragment {
         cardView=view.findViewById(R.id.chal_on_map);
         _chal_address=view.findViewById(R.id.chal_address);
         _chal_takeMe=view.findViewById(R.id.chal_takeMe);
-        _chal_title=view.findViewById(R.id.chal_title);
         _chal_owner=view.findViewById(R.id.chal_owner);
         _chal_cancel=view.findViewById(R.id.chal_cancel);
+        _chal_photo=view.findViewById(R.id.chal_photo);
+        _chal_toggle=view.findViewById(R.id.chal_toggle);
 
         geocoder=new Geocoder(getContext(), Locale.getDefault());
 
@@ -145,7 +149,7 @@ public class Maps extends Fragment {
         LatLong latLong=new LatLong(Latitude, Longitude);
         mapView.setCenter(latLong);
         drawMyPositionMarker(R.drawable.ic_my_location_black_24dp,latLong);
-        mapView.setZoomLevel((byte) 19);
+        mapView.setZoomLevel((byte) 15);
 
         getChallenges();
     }
@@ -190,18 +194,16 @@ public class Maps extends Fragment {
                 if (contains(layerXY,tapXY)){
                     try {
                         addresses = geocoder.getFromLocation(latLong.latitude,latLong.longitude,1);
-                        Toast.makeText(getContext()," Country "+addresses.get(0).getCountryName()+
-                                " Wilaya "+addresses.get(0).getAdminArea()+
-                                " Belediya "+addresses.get(0).getLocality()+
-                                " Address "+addresses.get(0).getAddressLine(0)
-                                ,Toast.LENGTH_LONG).show();
                         //*********open challenge
                         if (cardView.getVisibility()==View.INVISIBLE | cardView.getVisibility()==View.GONE){
                             cardView.setVisibility(View.VISIBLE);
                         }
-                        _chal_title.setText(challenge.getCity());
-                        _chal_owner.setText(challenge.getOwner().getFirst_name());
+
+                        _chal_owner.setText(challenge.getOwner().getUser_name());
                         _chal_address.setText(addresses.get(0).getAdminArea()+ " "+addresses.get(0).getLocality());
+                        List<Photo> photos = new ArrayList<Photo>();
+                        photos.addAll(challenge.getPhoto());
+                        Glide.with(getActivity()).load(photos.get(0).getPath()).into(_chal_photo);
 
                         _chal_takeMe.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -210,6 +212,17 @@ public class Maps extends Fragment {
                             }
                         });
 
+                        _chal_toggle.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Intent intent = new Intent(getActivity(), Challenge_details.class);
+                                Bundle bundle=new Bundle();
+                                bundle.putInt("challenge_id",challenge.getId_challenge());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
                         _chal_cancel.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -256,14 +269,13 @@ public class Maps extends Fragment {
     private void GetRoute(double lat,double lng) {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url ="http://www.mapquestapi.com/directions/v2/route?key=deamSBfbxULjOkFvP9dW1QiAKewVYxVg&json={locations:[{latLng:{lat:"+Latitude+",lng:"+Longitude+"}},{latLng:{lat: "+lat+" ,lng:"+lng+"}}]}";
+        String url ="http://www.mapquestapi.com/directions/v2/route?key=AefLNjc23R9LoQlfFdBWG47ubfPzLXK1&json={locations:[{latLng:{lat:"+Latitude+",lng:"+Longitude+"}},{latLng:{lat: "+lat+" ,lng:"+lng+"}}]}";
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
                         getPathFromJson(response);
                     }
                 }, new Response.ErrorListener() {
@@ -302,7 +314,7 @@ public class Maps extends Fragment {
 
     public void DrawPath(List<LatLong> Paths){
         Paint paint = AndroidGraphicFactory.INSTANCE.createPaint();
-        paint.setColor(Color.RED);
+        paint.setColor(getResources().getColor(R.color.colorPrimary));
         paint.setStrokeWidth(15);
         paint.setStyle(Style.STROKE);
 

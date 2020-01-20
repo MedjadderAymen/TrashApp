@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Welcome"
-    android:background="@drawable/back">
+    tools:context=".Welcome">
+
+    <ImageView
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fi"
+        android:layout_centerInParent="true"/>
 
     <RelativeLayout
         android:elevation="10dp"
@@ -21,8 +27,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="Se connecter"
-            android:textColor="@color/white"
-            android:drawableEnd="@drawable/ic_keyboard_arrow_right_black_24dp"/>
+            android:textColor="@color/colorPrimary"
+            android:drawableEnd="@drawable/ic_keyboard_arrow_right_primary_color_24dp"/>
 
     </RelativeLayout>
 
@@ -44,7 +50,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:text="Lorsque nous montrons notre respect pour les autres êtres vivants, ils réagissent avec respect pour nous."
-        android:textColor="@color/white"
+        android:textColor="@color/view"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/chercher"
         android:layout_margin="40dp"/>

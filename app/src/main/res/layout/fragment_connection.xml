@@ -3,61 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rl"
     tools:context=".Fragments.Connection">
 
-
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="Bienvenue à TrashApp"
-        android:textSize="30dp"
-        android:layout_marginTop="60dp"
-        android:textColor="@color/colorPrimary"
-        android:id="@+id/welcmtext"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="Connectez-vous pour continuer"
-        android:textSize="15sp"
-        android:layout_below="@+id/welcmtext"
-        android:id="@+id/signinto"/>
-
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:text="Mot de passe oublié ?"
-        android:textSize="15dp"
-        android:layout_marginLeft="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/person" />
+
+<RelativeLayout
+    android:layout_centerInParent="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_marginTop="50dp"
+        android:id="@+id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome back to,"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/t2"
+        android:layout_below="@id/t1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trash App."
         android:textColor="@color/colorPrimary"
-        />
+        style="@style/TextAppearance.AppCompat.Display1"
+        android:layout_marginStart="10dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signinto"
-        android:layout_marginTop="40dp">
+        android:layout_margin="10px"
+        android:layout_below="@+id/t2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:hint="Email"
             android:imeOptions="actionNext"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:padding="10dp"
             android:inputType="textEmailAddress"
-            />
+            android:layout_margin="10px"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,82 +60,80 @@
         android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/til_email"
-        android:layout_marginTop="20dp"
-
-        >
+        android:layout_margin="10px"
+        android:layout_below="@+id/til_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:hint="Mot de passe"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:imeOptions="actionNext"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:padding="10dp"
-            android:id="@+id/password"
-            android:inputType="textPassword"
-            />
+            android:inputType="textEmailAddress"
+            android:layout_margin="10px"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/button_back"
-        android:hint="Procéder"
-        android:textColor="@color/white"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_below="@+id/til_password"
-        android:layout_marginTop="20dp"
-        android:id="@+id/btn_login"
-        android:textColorHint="@color/white"
-        android:textAlignment="textStart"
-        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
-        android:padding="20dp"
-        />
-
     <TextView
+        android:id="@+id/tv_forgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Or"
-        android:id="@+id/or"
+        android:text="Forgot Password?"
+        android:textColor="@color/colorPrimary"
+        android:layout_below="@id/til_password"
+        android:layout_alignRight="@id/til_password"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="SIGN IN"
+        android:textColorHint="@color/white"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_white_color_24dp"
+        android:background="@drawable/button_back"
+        android:layout_below="@id/tv_forgetPassword"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"/>
+
+    <TextView
+        android:id="@+id/t3"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
-        android:layout_below="@id/btn_login"
-        android:layout_marginTop="15dp"
-        />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignBottom="@id/or"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/or"
-        android:background="@color/view" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_alignBottom="@id/or"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_toLeftOf="@id/or"
-        android:background="@color/view" />
-
-
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/btn_facebook"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
+        android:layout_below="@id/login"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/or"/>
+        android:text="Or Sign In with"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_below="@id/t3"
+        android:layout_marginTop="5px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <ImageButton
+            android:id="@+id/facebook"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/facebook"/>
+
+        <ImageButton
+            android:id="@+id/google"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/google"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+
 
 </RelativeLayout>

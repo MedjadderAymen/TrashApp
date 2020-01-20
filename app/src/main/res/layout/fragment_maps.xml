@@ -10,6 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/back_ground_other"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_refresh_black_24dp"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -26,9 +34,9 @@
         android:padding="10dp"
         android:id="@+id/chal_on_map"
         app:cardCornerRadius="10dp"
+        android:visibility="invisible"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:visibility="invisible"
         app:cardElevation="10dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="90dp"
@@ -39,44 +47,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/chal_owner_pic"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/ok"
-                app:civ_border_width="2dp"
-                app:civ_border_color="@color/view"/>
+
 
             <TextView
-                android:id="@+id/chal_title"
+                android:id="@+id/chal_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nétoyage centre ville"
                 android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/chal_owner_pic"
                 android:textStyle="bold"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorPrimary"
                 android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/chal_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/chal_title"
-                android:layout_toRightOf="@id/chal_owner_pic"
+                android:layout_below="@id/chal_address"
                 android:layout_marginLeft="3dp"
                 android:text="Medjadder Aimen"
-                android:textStyle="normal" />
-
-            <TextView
-                android:id="@+id/chal_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/chal_owner"
-                android:layout_toRightOf="@id/chal_owner_pic"
-                android:layout_marginLeft="5dp"
                 android:textStyle="normal" />
 
             <TextView
@@ -101,21 +90,22 @@
 
 
 
-             <TextView
-                 android:id="@+id/chal_description"
+             <ImageView
+                 android:id="@+id/chal_photo"
                  android:layout_margin="5dp"
                  android:paddingLeft="5dp"
                  android:paddingRight="5dp"
-                 android:layout_below="@id/chal_owner_pic"
+                 android:layout_below="@id/chal_owner"
                  android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
+                 android:layout_height="120dp"
+                 android:scaleType="centerCrop"
                  android:text="@string/lorem"/>
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/chal_description"
+                android:layout_below="@id/chal_photo"
                 android:background="@color/view"
                 android:layout_marginRight="5dp"
                 android:layout_marginLeft="5dp"/>
@@ -128,7 +118,7 @@
                 android:layout_below="@id/view"
                 android:text="Détaille"
                 android:layout_alignParentRight="true"
-                android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                android:drawableRight="@drawable/ic_keyboard_arrow_right_primary_color_24dp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 android:layout_marginRight="15dp"/>

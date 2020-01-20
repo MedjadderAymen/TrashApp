@@ -1,7 +1,5 @@
 package com.medjay.trashapp.Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,7 +30,7 @@ public class Home extends Fragment {
         viewPager=view.findViewById(R.id.container);
 
         ViewPagerAdapter adapter=new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new List(),"List");
+        adapter.addFragment(new Challenges(),"Challenges");
         adapter.addFragment(new Maps(),"Maps");
 
         viewPager.setAdapter(adapter);

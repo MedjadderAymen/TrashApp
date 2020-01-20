@@ -41,20 +41,6 @@ public class Welcome extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
 
 
-        Bundle bundle=getIntent().getExtras();
-
-        Longitude=bundle.getDouble("Longitude");
-        Latitude=bundle.getDouble("Latitude");
-        Altitude=bundle.getDouble("Altitude");
-
-        geocoder=new Geocoder(this, Locale.getDefault());
-        try {
-            addresses = geocoder.getFromLocation(Latitude,Longitude,1);
-            Toast.makeText(Welcome.this,"country "+addresses.get(0).getCountryName()+" wilaya "+addresses.get(0).getAdminArea(),Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         _connecter=findViewById(R.id.connecter);
         _connecter.setOnClickListener(new View.OnClickListener() {
             @Override
