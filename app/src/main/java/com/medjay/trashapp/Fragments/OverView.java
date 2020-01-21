@@ -138,13 +138,32 @@ Client client;
     }
 
     private void participateInChallenge() {
-        WebServerIntf webServerIntf=RetrofitBuilder.getRetrofitInstance().create(WebServerIntf.class);
+        final WebServerIntf webServerIntf=RetrofitBuilder.getRetrofitInstance().create(WebServerIntf.class);
         Call<String> call=webServerIntf.participate(client.getId_user(),challenge.getId_challenge());
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.body()==null){
                     Toast.makeText(getContext(),"already participated",Toast.LENGTH_SHORT).show();
+                    final Button non_participate= (Button) view.findViewById(R.id.non_participate);
+                    non_participate.setVisibility(View.VISIBLE);
+                    non_participate.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Call<String>  stringCall=webServerIntf.DeleteParticipents(challenge.getId_challenge(),client.getId_user());
+                            stringCall.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+                                    Toast.makeText(getContext(),"participation canceled ",Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                    non_participate.setVisibility(View.GONE);
+                                }
+                            });
+                        }
+                    });
                 }else {
 
                     Toast.makeText(getContext(),"Nice!",Toast.LENGTH_SHORT).show();

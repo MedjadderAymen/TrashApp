@@ -30,10 +30,12 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.medjay.trashapp.Challenge_details;
+import com.medjay.trashapp.MyHelperSQLite;
 import com.medjay.trashapp.Network.RetrofitBuilder;
 import com.medjay.trashapp.Network.WebServerIntf;
 import com.medjay.trashapp.R;
 import com.medjay.trashapp.entities.Challenge;
+import com.medjay.trashapp.entities.ChallengeSQL;
 import com.medjay.trashapp.entities.Photo;
 
 import org.json.JSONArray;
@@ -169,7 +171,12 @@ public class Maps extends Fragment {
 
             @Override
             public void onFailure(Call<List<Challenge>> call, Throwable t) {
+                MyHelperSQLite myHelperSQLite=new MyHelperSQLite(getContext());
 
+                List<ChallengeSQL> challenges=myHelperSQLite.getChallenges();
+                for (int i=0;i<challenges.size();i++){
+                    drawChallengesSQLMarker(R.drawable.ic_location_on_black_24dp,challenges.get(i));
+                }
             }
         });
     }
@@ -330,4 +337,67 @@ public class Maps extends Fragment {
     }
 
 
+    public void drawChallengesSQLMarker(int resourceId, final ChallengeSQL challengeSQL){
+        Drawable drawable = getResources().getDrawable(resourceId);
+
+        Bitmap bitmap = AndroidGraphicFactory.convertToBitmap(drawable);
+
+        bitmap.scaleTo(50,50);
+        final LatLong latLong=new LatLong(challengeSQL.getLatitude(),challengeSQL.getLongitude());
+        Marker marker = new Marker(latLong, bitmap, 0, -bitmap.getHeight() / 2){
+            @Override
+            public boolean onTap(LatLong tapLatLong, Point layerXY, Point tapXY) {
+                if (contains(layerXY,tapXY)){
+                    try {
+                        addresses = geocoder.getFromLocation(latLong.latitude,latLong.longitude,1);
+                        //*********open challenge
+                        if (cardView.getVisibility()==View.INVISIBLE | cardView.getVisibility()==View.GONE){
+                            cardView.setVisibility(View.VISIBLE);
+                        }
+
+                        _chal_owner.setText(challengeSQL.getUser_name());
+                        _chal_address.setText(addresses.get(0).getAdminArea()+ " "+addresses.get(0).getLocality());
+
+                        Glide.with(getActivity()).load(challengeSQL.getOne_path()).into(_chal_photo);
+
+                        _chal_takeMe.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                GetRoute(latLong.latitude,latLong.longitude);
+                            }
+                        });
+
+                        _chal_toggle.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Intent intent = new Intent(getActivity(), Challenge_details.class);
+                                Bundle bundle=new Bundle();
+                                bundle.putInt("challenge_id",challengeSQL.getId_challenge());
+                                intent.putExtras(bundle);
+                                startActivity(intent);
+                            }
+                        });
+                        _chal_cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (cardView.getVisibility()==View.VISIBLE ){
+                                    cardView.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                        });
+
+                        //******************************
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+        };
+        mapView.getLayerManager().getLayers().add(marker);
+    }
 }

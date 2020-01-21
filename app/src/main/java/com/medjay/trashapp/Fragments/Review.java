@@ -206,7 +206,7 @@ public class Review extends Fragment {
         DateFormat df= DateFormat.getDateInstance(DateFormat.SHORT);
         Date birthday = null;
         try {
-            birthday = df.parse("2020-01-03 21:54");
+            birthday = df.parse("2020-01-03");
         } catch (ParseException e) {
             e.printStackTrace();
         }

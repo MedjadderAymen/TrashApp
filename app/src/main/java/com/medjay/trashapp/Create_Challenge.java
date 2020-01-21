@@ -173,6 +173,14 @@ public class Create_Challenge extends AppCompatActivity {
             }
         });
 
+        ImageView exit = findViewById(R.id.exit);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         SwipeButton enableButton = (SwipeButton) findViewById(R.id.swipe_btn);
         enableButton.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
@@ -300,7 +308,6 @@ public class Create_Challenge extends AppCompatActivity {
             }
 
         }
-
         return true;
 
     }

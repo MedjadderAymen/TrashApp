@@ -24,6 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -62,18 +63,29 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent intent=new Intent(MainActivity.this, Welcome.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putDouble("Longitude",Longitude);
-                    editor.putFloat("Longitude",(float)Longitude);
-                    bundle.putDouble("Latitude",Latitude);
-                    editor.putFloat("Latitude",(float)Latitude);
-                    bundle.putDouble("Altitude",Altitude);
-                    editor.putFloat("Altitude",(float)Altitude);
-                    editor.apply();
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();
+
+                    Gson gson = new Gson();
+                    String json = getSharedPreferences("prefs",0).getString("client", null);
+                    if(json==null){
+                        Intent intent=new Intent(MainActivity.this, Welcome.class);
+                        Bundle bundle=new Bundle();
+                        bundle.putDouble("Longitude",Longitude);
+                        editor.putFloat("Longitude",(float)Longitude);
+                        bundle.putDouble("Latitude",Latitude);
+                        editor.putFloat("Latitude",(float)Latitude);
+                        bundle.putDouble("Altitude",Altitude);
+                        editor.putFloat("Altitude",(float)Altitude);
+                        editor.apply();
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+                        finish();
+
+                    }else {
+                        Intent intent=new Intent(MainActivity.this, Home.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
                 }
             },SPLASH_TIME_OUT);
         }else{

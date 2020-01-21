@@ -12,6 +12,7 @@ import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -59,4 +60,9 @@ public interface WebServerIntf {
 
     @GET("/participants/{id_challenge}")
     Call<Set<Client>> getParticipents(@Path("id_challenge") int id_challenge);
+
+
+    @DELETE("/challenges/{id_challenge}/{id_user}")
+    Call<String> DeleteParticipents(@Path("id_challenge") int id_challenge,
+                                    @Path("id_user") int id_user);
 }
